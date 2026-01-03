@@ -1,5 +1,127 @@
 # Changelog
 
+## 2026-01-03 - Repository Quality Practices
+
+### GitHub Templates
+
+**Created:**
+- `.github/ISSUE_TEMPLATE/bug_report.yml` - Structured bug report template
+- `.github/ISSUE_TEMPLATE/feature_request.yml` - Feature request template
+- `.github/ISSUE_TEMPLATE/config.yml` - Issue template configuration (disables blank issues)
+- `.github/PULL_REQUEST_TEMPLATE.md` - Comprehensive PR template
+
+**Benefits:**
+- Consistent issue/PR submissions
+- Reduces triage time for maintainers
+- Guides contributors to provide useful information
+- Professional contribution workflow
+
+### Code Quality
+
+**Created `.editorconfig`:**
+- Basic editor settings (indentation, encoding, line endings)
+- Works alongside Prettier for cross-platform consistency
+- Prevents line-ending conflicts (LF enforced)
+- Auto-parsed by Prettier (no config duplication)
+
+**Settings:**
+- `charset = utf-8`
+- `end_of_line = lf`
+- `indent_style = space`
+- `indent_size = 2`
+
+### Dependency Management
+
+**Created `.github/dependabot.yml`:**
+- Automated weekly dependency updates (Mondays)
+- Separate groups for dev and production dependencies
+- GitHub Actions updates included
+- Max 10 npm PRs, 5 Actions PRs
+
+**Configuration:**
+- npm ecosystem: weekly updates, grouped by type (dev/prod)
+- GitHub Actions: weekly updates, version pinning
+
+### Documentation
+
+**Created `LICENSE` (MIT):**
+- Standard MIT license for open source projects
+- Copyright: 2026 BodhiSearch
+
+**Created `.github/SECURITY.md`:**
+- Security vulnerability reporting policy
+- GitHub Security Advisories preferred method
+- 48-hour acknowledgment, 90-day fix timeline
+- Responsible disclosure process
+
+**Created `CONTRIBUTING.md`:**
+- Comprehensive contribution guidelines
+- Development workflow and setup instructions
+- **Conventional Commits** documentation (not enforced via hooks)
+- Available scripts reference
+- Code style guidelines
+- Testing guidelines
+- PR process checklist
+
+**Updated `README.md`:**
+- Added CI, License, and Deploy badges
+- Comprehensive feature list
+- Quick start guide
+- Available scripts documentation (dev, quality, testing)
+- Project structure tree
+- Configuration guidance
+- CI/CD pipeline explanation
+- Links to CONTRIBUTING.md and SECURITY.md
+
+### Conventional Commits (Documentation Only)
+
+**Format:** `<type>(<scope>): <subject>`
+
+**Types:**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `style`: Formatting changes
+- `refactor`: Code restructuring
+- `perf`: Performance improvements
+- `test`: Test updates
+- `chore`: Build/tooling changes
+
+**Note:** Not enforced via git hooks (non-opinionated approach)
+
+### Files Added
+
+| File | Purpose |
+|------|---------|
+| `.github/ISSUE_TEMPLATE/bug_report.yml` | Bug report template |
+| `.github/ISSUE_TEMPLATE/feature_request.yml` | Feature request template |
+| `.github/ISSUE_TEMPLATE/config.yml` | Template configuration |
+| `.github/PULL_REQUEST_TEMPLATE.md` | PR template |
+| `.editorconfig` | Editor consistency |
+| `.github/dependabot.yml` | Dependency automation |
+| `LICENSE` | MIT license |
+| `.github/SECURITY.md` | Security policy |
+| `CONTRIBUTING.md` | Contribution guide |
+
+**Total:** 9 new files for quality practices
+
+### Why These Practices?
+
+**Tier 1 (Included):**
+- Zero runtime overhead
+- Industry-standard best practices
+- Improves collaboration and code quality
+- Non-opinionated (no enforcement via hooks)
+- Low maintenance burden
+- Professional appearance
+
+**Not Included:**
+- Git hooks (opinionated enforcement)
+- Advanced analysis tools (CodeQL, SonarCloud) - can add later
+- Knip, Renovate - optional, can add when needed
+
+---
+
 ## 2026-01-03 - CI Workflow Restructure
 
 ### CI Workflow
