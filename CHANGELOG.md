@@ -1,5 +1,69 @@
 # Changelog
 
+## 2026-01-03 - CI Workflow Restructure
+
+### CI Workflow
+
+**Created:** `.github/workflows/ci.yml`
+
+**Purpose:** Main CI pipeline running all checks before deployment
+
+**Permissions:**
+- `contents: write` - Required for repository_dispatch trigger
+
+**Pipeline Steps:**
+1. Checkout → Setup Node → npm ci
+2. Lint (ESLint + Prettier)
+3. Build (tsc -b && vite build)
+4. Typecheck (tsc --noEmit)
+5. Unit tests (vitest run)
+6. E2E tests (Playwright headless)
+7. Trigger deploy (only on main push)
+
+**Caching:**
+- npm dependencies via `actions/setup-node@v4`
+- Playwright browsers via `actions/cache@v4` with version key
+
+**Triggers:**
+- Push to main
+- Pull requests to main
+- Manual dispatch with optional ref (branch/tag/commit)
+
+**Deploy Trigger:**
+- Uses `repository_dispatch` event type `deploy-pages`
+- Passes commit SHA via `client-payload`
+- Only triggers on successful main branch push
+
+### Deploy Workflow Changes
+
+**Modified:** `.github/workflows/deploy-pages.yml`
+
+**Changes:**
+1. **Removed** automatic deployment on push to main
+2. **Added** `repository_dispatch` trigger (auto from CI)
+3. **Added** `workflow_dispatch` with ref input (manual deploy)
+4. **Updated** checkout to handle both trigger types
+
+**Checkout Logic:**
+```yaml
+ref: ${{ github.event.inputs.ref || github.event.client_payload.sha || 'main' }}
+```
+- `inputs.ref`: Manual dispatch with specific ref
+- `client_payload.sha`: Auto from CI with commit SHA
+- `'main'`: Fallback default
+
+**New Workflow:**
+```
+Push to main → ci.yml runs → All checks pass → Triggers deploy-pages.yml → Deploy
+```
+
+**Manual Deploy:**
+```bash
+gh workflow run deploy-pages.yml --ref <branch/tag/commit>
+```
+
+---
+
 ## 2026-01-03 - Project Bootstrap
 
 ### Vite + React + TypeScript Setup

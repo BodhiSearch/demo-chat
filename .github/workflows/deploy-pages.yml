@@ -1,9 +1,15 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [main]
+  repository_dispatch:
+    types: [deploy-pages]
   workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Git ref to deploy (branch/tag/commit)'
+        required: false
+        default: 'main'
+        type: string
 
 permissions:
   contents: read
@@ -19,6 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.inputs.ref || github.event.client_payload.sha || 'main' }}
       - uses: actions/setup-node@v6
         with:
           node-version: '22'
