@@ -179,6 +179,48 @@ npm install -D prettier eslint-plugin-prettier eslint-config-prettier
 
 ---
 
+### Playwright E2E Testing
+
+**Dependencies installed:**
+```bash
+npm install -D @playwright/test@1.56.0 playwright@1.56.0 cross-env
+npx playwright install chromium
+```
+
+**Files created:**
+1. `playwright.config.ts` - Playwright configuration (testDir: e2e, CI-aware timeouts)
+2. `e2e/placeholder.spec.ts` - Placeholder test verifying landing page
+
+**Files modified:**
+1. `package.json` - Added test:e2e scripts and dependencies
+2. `.gitignore` - Added Playwright artifacts (test-results, playwright-report, etc.)
+
+**NPM Scripts:**
+| Script | Command | Purpose |
+|--------|---------|---------|
+| `test:e2e` | `playwright test --headed` | Run e2e tests in headed mode |
+| `test:e2e:ui` | `playwright test --ui` | Interactive UI mode |
+| `ci:test:e2e` | `cross-env CI=true playwright test` | Run e2e tests in CI (headless) |
+
+**Configuration highlights:**
+- Test directory: `./e2e`
+- Base URL: `http://localhost:5173/demo-chat/`
+- Browser: Chromium only (Desktop Chrome)
+- WebServer: Starts Vite dev server automatically
+- CI mode: 2 retries, 60s timeout, headless
+- Local mode: No retries, 30s timeout, headed by default
+
+**Placeholder test:**
+- Verifies "Vite + React" heading present
+- Confirms #root element visible
+- Validates app launches successfully
+
+**References:**
+- Sibling project pattern: `setup-modal-test-app/playwright.config.ts`
+- [Playwright Vite React setup](https://dev.to/juan_deto/configure-vitest-msw-and-playwright-in-a-react-project-with-vite-and-ts-part-3-32pe)
+
+---
+
 ### Notes
 
 - Tailwind v4 significantly simpler than v3 (fewer dependencies, zero config)
@@ -186,4 +228,6 @@ npm install -D prettier eslint-plugin-prettier eslint-config-prettier
 - SPA 404 hack is necessary workaround until GitHub Pages supports custom headers
 - ESLint 9 flat config with Prettier integration follows 2025 best practices
 - No `typecheck:fix` - TypeScript errors require manual fixes
+- Playwright 1.56.0 matches sibling project versions for consistency
+- E2E tests in `e2e/` folder, headed by default for development
 - Total setup time: ~2 minutes including manual edits
