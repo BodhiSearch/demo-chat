@@ -137,9 +137,53 @@ gh run watch          # Monitor deployment
 
 ---
 
+### Linting & Type Checking Configuration
+
+**Dependencies installed:**
+```bash
+npm install -D prettier eslint-plugin-prettier eslint-config-prettier
+```
+
+**Files created:**
+1. `.prettierrc` - Prettier configuration (tab: 2, width: 100, single quotes)
+2. `.prettierignore` - Ignore dist, node_modules, markdown files
+
+**Files modified:**
+1. `eslint.config.js` - Added `eslint-plugin-prettier/recommended` integration
+2. `package.json` - Added lint, typecheck, and combined check scripts
+
+**NPM Scripts:**
+| Script | Command | Purpose |
+|--------|---------|---------|
+| `lint` | `eslint . --max-warnings 0` | Check ESLint + Prettier, fail on issues |
+| `lint:fix` | `eslint . --fix` | Auto-fix ESLint + Prettier issues |
+| `typecheck` | `tsc --noEmit` | TypeScript type checking only |
+| `check` | `npm run lint && npm run typecheck` | Run both checks |
+| `check:fix` | `npm run lint:fix && npm run typecheck` | Fix lint, then typecheck |
+
+**Prettier settings:**
+- `printWidth: 100` (line width)
+- `tabWidth: 2` (spaces per indent)
+- `singleQuote: true` (prefer single quotes)
+- `trailingComma: "es5"`
+- `arrowParens: "avoid"`
+
+**Integration approach:**
+- Uses `eslint-plugin-prettier/recommended` (flat config compatible)
+- Runs Prettier as ESLint rule
+- Disables conflicting ESLint rules automatically
+
+**References:**
+- [eslint-plugin-prettier](https://github.com/prettier/eslint-plugin-prettier)
+- [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)
+
+---
+
 ### Notes
 
 - Tailwind v4 significantly simpler than v3 (fewer dependencies, zero config)
 - Vite's non-interactive mode has limitations when targeting existing directories
 - SPA 404 hack is necessary workaround until GitHub Pages supports custom headers
+- ESLint 9 flat config with Prettier integration follows 2025 best practices
+- No `typecheck:fix` - TypeScript errors require manual fixes
 - Total setup time: ~2 minutes including manual edits
