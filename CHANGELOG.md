@@ -47,6 +47,18 @@ npm install -D tailwindcss @tailwindcss/vite
 
 ---
 
+### Base Path Configuration
+
+**Change:**
+- Added `base: '/demo-chat/'` to `vite.config.ts`
+
+**Purpose:**
+- Prepare for GitHub Pages deployment at `https://[username].github.io/demo-chat/`
+- Ensures all asset paths are correctly prefixed
+- No impact on local development
+
+---
+
 ### Notes
 
 - Tailwind v4 significantly simpler than v3 (fewer dependencies, zero config)
