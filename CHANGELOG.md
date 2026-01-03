@@ -221,6 +221,45 @@ npx playwright install chromium
 
 ---
 
+### Vitest Unit Testing
+
+**Dependencies installed:**
+```bash
+npm install -D vitest @testing-library/react @testing-library/jest-dom jsdom @testing-library/user-event
+```
+
+**Files created:**
+1. `src/test/setup.ts` - Test setup importing jest-dom matchers
+2. `src/App.test.tsx` - Placeholder tests for App component
+
+**Files modified:**
+1. `vite.config.ts` - Added test configuration block with jsdom environment
+2. `package.json` - Added test scripts and dependencies
+3. `tsconfig.app.json` - Added "vitest/globals" to types array
+
+**NPM Scripts:**
+| Script | Command | Purpose |
+|--------|---------|---------|
+| `test` | `vitest run` | Run tests once (default) |
+| `test:watch` | `vitest` | Run tests in watch mode |
+| `test:coverage` | `vitest run --coverage` | Run with coverage report |
+
+**Configuration highlights:**
+- Test framework: Vitest with React Testing Library
+- Environment: jsdom for DOM simulation
+- Global test functions: describe, test, expect
+- Setup file: `src/test/setup.ts` for jest-dom matchers
+- Test pattern: `src/**/*.{test,spec}.{ts,tsx}`
+
+**Placeholder tests:**
+- Verifies App component renders
+- Checks "Vite + React" heading present
+- Validates DOM structure
+
+Test verified: 2 passed (79ms)
+
+---
+
 ### Notes
 
 - Tailwind v4 significantly simpler than v3 (fewer dependencies, zero config)
@@ -230,4 +269,5 @@ npx playwright install chromium
 - No `typecheck:fix` - TypeScript errors require manual fixes
 - Playwright 1.56.0 matches sibling project versions for consistency
 - E2E tests in `e2e/` folder, headed by default for development
+- Vitest for unit tests, Playwright for e2e - complementary testing strategy
 - Total setup time: ~2 minutes including manual edits
