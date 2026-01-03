@@ -11,7 +11,10 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
     "check": "npm run lint && npm run typecheck",
-    "check:fix": "npm run lint:fix && npm run typecheck"
+    "check:fix": "npm run lint:fix && npm run typecheck",
+    "test:e2e": "playwright test --headed",
+    "test:e2e:ui": "playwright test --ui",
+    "ci:test:e2e": "cross-env CI=true playwright test"
   },
   "dependencies": {
     "react": "^19.2.0",
@@ -19,17 +22,21 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.57.0",
     "@tailwindcss/vite": "^4.1.18",
     "@types/node": "^25.0.3",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "cross-env": "^10.1.0",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^17.0.0",
+    "jsdom": "^27.4.0",
+    "playwright": "^1.57.0",
     "prettier": "^3.7.4",
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
