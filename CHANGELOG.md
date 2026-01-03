@@ -1,5 +1,58 @@
 # Changelog
 
+## 2026-01-04 - shadcn/ui Setup
+
+### shadcn/ui Integration (Tailwind v4)
+
+**Prerequisites configured:**
+1. Path aliases for `@/*` imports
+   - Updated `tsconfig.json` - Added `baseUrl` and `paths`
+   - Updated `tsconfig.app.json` - Added `baseUrl` and `paths`
+   - Updated `vite.config.ts` - Added `resolve.alias` for `@`
+
+**Installation commands:**
+```bash
+npx shadcn@latest init --yes --defaults
+npx shadcn@latest add button --yes
+```
+
+**Files created:**
+- `components.json` - shadcn configuration (new-york style, neutral base color, OKLCH colors)
+- `src/lib/utils.ts` - Utility functions (cn helper for class merging)
+- `src/components/ui/button.tsx` - Button component with variants
+
+**Files modified:**
+- `src/index.css` - CSS variables added by shadcn init
+  - Added `tw-animate-css` import (Tailwind v4 animation plugin)
+  - Added `@custom-variant dark` directive
+  - Added `@theme inline` block with CSS variable mappings
+  - Added `:root` with OKLCH color definitions
+  - Added `.dark` theme with OKLCH dark mode colors
+  - Added `@layer base` for border and background defaults
+- `src/App.tsx` - Counter button replaced with shadcn Button component
+- `eslint.config.js` - Disabled `react-refresh/only-export-components` for shadcn ui components
+
+**Dependencies added:**
+- `@radix-ui/react-slot` (^1.2.4)
+- `class-variance-authority` (^0.7.1)
+- `clsx` (^2.1.1)
+- `lucide-react` (^0.562.0)
+- `tailwind-merge` (^3.4.0)
+
+**Key features:**
+- shadcn v3.6.2 with native Tailwind v4 support
+- OKLCH color system (modern replacement for HSL)
+- new-york style (default for new projects)
+- tw-animate-css (Tailwind v4 animation library, replaces tailwindcss-animate)
+- CSS variables with dark mode support
+- Icon library: lucide-react
+
+**References:**
+- [shadcn/ui Vite Installation](https://ui.shadcn.com/docs/installation/vite)
+- [shadcn/ui Tailwind v4 Guide](https://ui.shadcn.com/docs/tailwind-v4)
+
+---
+
 ## 2026-01-03 - Repository Quality Practices
 
 ### GitHub Templates
