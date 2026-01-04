@@ -36,7 +36,7 @@ jobs:
         env:
           VITE_AUTH_CLIENT_ID: app-76b53416-f7be-4ba3-8a90-2a8514b8e359
           VITE_AUTH_SERVER_URL: https://id.getbodhi.app/realms/bodhi
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
 
