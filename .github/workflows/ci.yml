@@ -22,6 +22,9 @@ permissions:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    env:
+      VITE_AUTH_CLIENT_ID: test-client-id
+      VITE_AUTH_SERVER_URL: https://test.example.com
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -42,12 +45,18 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_AUTH_CLIENT_ID: test-client-id
+          VITE_AUTH_SERVER_URL: https://test.example.com
 
       - name: Typecheck
         run: npm run typecheck
 
       - name: Unit tests
         run: npm run test
+        env:
+          VITE_AUTH_CLIENT_ID: test-client-id
+          VITE_AUTH_SERVER_URL: https://test.example.com
 
       - name: Cache Playwright browsers
         uses: actions/cache@v5
