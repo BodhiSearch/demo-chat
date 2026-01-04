@@ -1,5 +1,68 @@
 # Changelog
 
+## 2026-01-04 - Chat Interface Implementation
+
+### Bodhi Chat Application (bodhi-js-react)
+
+**Created components:**
+- `src/components/Layout.tsx` - Main layout with header and chat area
+- `src/components/Header.tsx` - Header with model selector, clear/logout controls
+- `src/components/ChatArea.tsx` - Scrollable message list with auto-scroll
+- `src/components/InputArea.tsx` - Message input with send button
+- `src/components/Message.tsx` - Individual message display (user/assistant)
+- `src/components/ModelSelector.tsx` - Model dropdown with loading state
+- `src/components/StatusIndicator.tsx` - Authentication/streaming status display
+
+**Created hooks:**
+- `src/hooks/useChat.ts` - Chat state management, streaming API integration, model loading
+
+**Created config:**
+- `src/env.ts` - Environment variable validation (AUTH_CLIENT_ID, AUTH_SERVER_URL)
+- `.env.example` - Environment template with auth configuration
+
+**Modified:**
+- `src/App.tsx` - Integrated BodhiProvider with auth and basePath config
+- `package.json` - Added bodhi-js-react and UI dependencies
+- `.gitignore` - Added .env exclusion
+
+**Dependencies added:**
+- `@bodhiapp/bodhi-js-react` (^0.0.12) - React SDK with BodhiProvider, useBodhi hook
+- `@radix-ui/react-scroll-area` (^1.2.10) - Scrollable chat area
+- `@radix-ui/react-select` (^2.2.6) - Model selector dropdown
+- `next-themes` (^0.4.6) - Dark mode support (future)
+- `sonner` (^2.0.7) - Toast notifications
+- `shadcn` (^3.6.2) - CLI for component installation
+
+**Key features:**
+- OAuth2 authentication via BodhiProvider
+- Real-time streaming chat completions
+- Model selection with auto-load from API
+- Conversation history management
+- Auto-scroll to latest message
+- Logout with session cleanup
+- Error handling with toast notifications
+- Abort controller for stream cancellation
+- StrictMode-safe model loading (double-invocation guard)
+
+**Architecture:**
+- `BodhiProvider` wraps app - provides auth and API client context
+- `useBodhi()` hook - accesses client, isAuthenticated, isReady state
+- `useChat()` hook - manages messages, streaming, model selection
+- `client.chat.completions.create()` - streaming API with async iteration
+- `client.models.list()` - async generator for available models
+
+**Configuration:**
+```env
+VITE_AUTH_CLIENT_ID=your-client-id-here
+VITE_AUTH_SERVER_URL=https://main-id.getbodhi.app/realms/bodhi
+```
+
+**References:**
+- [bodhi-js-sdk](https://github.com/BodhiSearch/bodhi-browser/tree/main/bodhi-js-sdk)
+- [BodhiProvider docs](https://github.com/BodhiSearch/bodhi-browser/blob/main/bodhi-js-sdk/packages/bodhi-js-react/README.md)
+
+---
+
 ## 2026-01-04 - shadcn/ui Setup
 
 ### shadcn/ui Integration (Tailwind v4)
